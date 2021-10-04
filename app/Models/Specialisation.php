@@ -9,5 +9,10 @@ class Specialisation extends Model
 {
     use HasFactory;
 
-    protected $guarded =[];
+    protected $guarded = [];
+
+    public function practitioner()
+    {
+        return $this->hasMany(Practitioner::class,'id','specialisation_id');
+    }
 }

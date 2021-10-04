@@ -104,7 +104,7 @@
                            <input type="text" name="phone" class="form-control">
                         </div>
                      </div> --}}
-                     <div class="col-md-6 col-lg-6">
+                     <div class="col-md-6 col-lg-3">
                         <div class="form-group">
                            <label>Gender</label>
                            <select class="form-control select" name="gender">
@@ -114,7 +114,13 @@
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-6 col-lg-6">
+                     <div class="col-md-6 col-lg-3">
+                        <div class="form-group">
+                           <label>Email</label>
+                           <input type="email" name="email" class="form-control">
+                        </div>
+                     </div>
+                     <div class="col-md-6 col-lg-3">
                         <div class="form-group">
                            <label>Specialisation</label>
                            <select class="form-control select" name="specialisation_id">

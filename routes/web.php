@@ -6,7 +6,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServiceProviderController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', [AdminController::class,'welcome']);
+
+
+//function () { return view('welcome'); });
 //patient
 Route::get('/search',[ClientController::class, 'searchView']);
 Route::get('/booking',[ClientController::class, 'bookingView']);

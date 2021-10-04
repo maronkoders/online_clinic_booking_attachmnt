@@ -4,7 +4,7 @@
    <div class="container-fluid">
       <div class="row align-items-center">
          <div class="col-md-12 col-12">
-            <h2 class="breadcrumb-title">Practitioners</h2>
+            <h2 class="breadcrumb-title">Clinic Details</h2>
          </div>
       </div>
    </div>

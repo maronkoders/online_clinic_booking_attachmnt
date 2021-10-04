@@ -31,7 +31,17 @@ class ServiceProviderController extends Controller
 
     public function adminDashboard()
     {
-        return view('admin.dashboard');
+
+        $totalPractitioners = 0;
+        $totalPatients = 0;
+        $totalAppointments = 0;
+        $all_patients  = array();
+        return view('admin.dashboard')
+                    ->with([
+                            'total_practitioners'=> $totalPractitioners,
+                            'total_patients'=> $totalPatients,
+                            'total_appointment'=> $totalAppointments,
+                            'all_patients'=> $all_patients]);
     }
 
     public function addPractitioner()
@@ -48,14 +58,13 @@ class ServiceProviderController extends Controller
     public function clinicDetails()
     {
         $clinicRecord = Clinic::latest()->first();
-
-         return view('admin.addClinic')->with(['clinic'=> $clinicRecord]);
+        return view('admin.addClinic')->with(['clinic'=> $clinicRecord]);
     }
 
 
     public function allPractitioner()
     {
-        $allPractitioner = Practitioner::all();
+        $allPractitioner = Practitioner::with(['specialisation','user'])->get();
         return view('admin.listPractitioners')->with(['practitioners'=> $allPractitioner]);
     }
 

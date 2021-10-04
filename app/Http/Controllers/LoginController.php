@@ -41,17 +41,17 @@ class LoginController extends Controller
     {
         $userTypeRecord = $this->getUserType($id);
 
-        if($userTypeRecord->name ="Admin")
+        if($userTypeRecord->name =="Admin")
         {
             return redirect()->intended('admin-dashboard');
         }
 
-        if($userTypeRecord->name ="Customer")
+        if($userTypeRecord->name =="Customer")
         {
             return redirect()->intended('dashboard');
         }
 
-        if($userTypeRecord->name ="Practitioner")
+        if($userTypeRecord->name =="Practitioner")
         {
             return redirect()->intended('doctor-dashboard');
         }

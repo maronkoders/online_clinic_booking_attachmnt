@@ -8,31 +8,16 @@
                       <img src="assets/img/logo.png" alt="logo">
                    </div>
                    <div class="footer-about-content">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                      <div class="social-icon">
-                         <ul>
-                            <li>
-                               <a href="#" target="_blank"><i class="feather-facebook"></i></a>
-                            </li>
-                            <li>
-                               <a href="#" target="_blank"><i class="feather-instagram"></i></a>
-                            </li>
-                            <li>
-                               <a href="#" target="_blank"><i class="feather-linkedin"></i></a>
-                            </li>
-                            <li>
-                               <a href="#" target="_blank"><i class="feather-twitter"></i></a>
-                            </li>
-                         </ul>
-                      </div>
+
+
                    </div>
                 </div>
              </div>
              <div class="col-lg-3 col-md-6">
-              
+
              </div>
              <div class="col-lg-3 col-md-6">
-               
+
              </div>
              <div class="col-lg-3 col-md-6">
                 <div class="footer-widget footer-contact">
@@ -62,14 +47,14 @@
              <div class="row">
                 <div class="col-md-6 col-lg-6">
                    <div class="copyright-text">
-                      <p class="mb-0">&copy; 2021 Doccure. All rights reserved.</p>
+                      <p class="mb-0">&copy; 2021 {{env('APP_NAME')}}. All rights reserved.</p>
                    </div>
                 </div>
                 <div class="col-md-6 col-lg-6">
                    <div class="copyright-menu">
                       <ul class="policy-menu">
-                         <li><a href="term-condition.html">Terms and Conditions</a></li>
-                         <li><a href="privacy-policy.html">Policy</a></li>
+                         <li><a href="javascript:void(0);">Terms and Conditions</a></li>
+                         <li><a href="javascript:void(0);">Policy</a></li>
                       </ul>
                    </div>
                 </div>

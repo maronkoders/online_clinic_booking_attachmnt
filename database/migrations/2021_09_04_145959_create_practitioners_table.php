@@ -10,11 +10,11 @@ class CreatePractitionersTable extends Migration
     {
         Schema::create('practitioners', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
             $table->enum('gender',['Male','Female']);
             $table->unsignedBigInteger('specialisation_id');
             $table->foreign('specialisation_id')->references('id')->on('specialisations');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('file_name');
             $table->timestamps();
         });

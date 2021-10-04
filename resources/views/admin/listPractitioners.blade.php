@@ -6,7 +6,7 @@
     <div class="container-fluid">
        <div class="row align-items-center">
           <div class="col-md-12 col-12">
-             <h2 class="breadcrumb-title">Dashboard</h2>
+             <h2 class="breadcrumb-title">Practitioners</h2>
              <nav aria-label="breadcrumb" class="page-breadcrumb">
                 <ol class="breadcrumb">
 
@@ -59,7 +59,7 @@
                                                 <td>
                                                    <h2 class="table-avatar">
                                                       {{-- <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a> --}}
-                                                     {{$item->first_name}}
+                                                     {{$item->user->name}}
 
 
 
@@ -68,11 +68,11 @@
                                                 </td>
                                                 <td>
 
-                                                    {{$item->last_name}}
+                                                    {{$item->user->surname}}
                                                 </td>
 
 
-                                                <td>{{$item->specialisation_id}}</td>
+                                                <td>{{ucfirst($item->specialisation->specialisation_name)}}</td>
                                                 {{-- <td class="text-left">
                                                    <div class="table-action">
                                                       <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
