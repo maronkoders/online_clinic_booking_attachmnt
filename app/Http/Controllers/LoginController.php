@@ -23,31 +23,27 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        //UserType::where('')
-   
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) 
+        if (Auth::attempt($credentials))
         {
-            return $this->redirectIntenedUser(Auth::user()->user_type_id); 
+            return $this->redirectIntenedUser(Auth::user()->user_type_id);
         }
-  
+
         return redirect("login")->withSuccess('Login details are not valid');
     }
-    
+
     private function getUserType($id)
-    {   
+    {
         return UserType::find($id);
-    }  
-    
+    }
+
     private function redirectIntenedUser($id)
     {
         $userTypeRecord = $this->getUserType($id);
-        
+
         if($userTypeRecord->name ="Admin")
         {
-            
-            return redirect()->intended('doctor-dashboard');
-           // ->withSuccess('Signed in');
+            return redirect()->intended('admin-dashboard');
         }
 
         if($userTypeRecord->name ="Customer")
@@ -62,7 +58,7 @@ class LoginController extends Controller
 
     }
 
-    public function signOut() 
+    public function signOut()
     {
         Session::flush();
         Auth::logout();

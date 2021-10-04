@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinic;
+use App\Models\Practitioner;
+use App\Models\Specialisation;
 use Illuminate\Http\Request;
 
 class ServiceProviderController extends Controller
@@ -30,5 +33,31 @@ class ServiceProviderController extends Controller
     {
         return view('admin.dashboard');
     }
+
+    public function addPractitioner()
+    {
+        $specialisation = Specialisation::all();
+        return view('admin.addPractitioner')->with(['specialisation'=>$specialisation]);
+    }
+
+    public function addClinic()
+    {
+        return view('admin.addClinic');
+    }
+
+    public function clinicDetails()
+    {
+        $clinicRecord = Clinic::latest()->first();
+
+         return view('admin.addClinic')->with(['clinic'=> $clinicRecord]);
+    }
+
+
+    public function allPractitioner()
+    {
+        $allPractitioner = Practitioner::all();
+        return view('admin.listPractitioners')->with(['practitioners'=> $allPractitioner]);
+    }
+
 }
 

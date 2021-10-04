@@ -3,6 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <title>{{env("APP_NAME")}}</title>
       <link type="image/x-icon" href="{{asset('client_assets/assets/img/favicon.png')}}" rel="icon">
       <link rel="stylesheet" href="{{asset('client_assets/assets/css/bootstrap.min.css')}}">
@@ -18,7 +19,6 @@
    <body>
       <div class="main-wrapper">
         @include('header')
-      
           @yield('content')
        @include('footer')
       </div>

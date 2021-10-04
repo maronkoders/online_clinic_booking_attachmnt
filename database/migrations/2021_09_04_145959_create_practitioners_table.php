@@ -6,24 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePractitionersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('practitioners', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->enum('gender',['Male','Female']);
+            $table->unsignedBigInteger('specialisation_id');
+            $table->foreign('specialisation_id')->references('id')->on('specialisations');
+            $table->string('file_name');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('practitioners');
