@@ -8,49 +8,32 @@
     <div class="row align-items-center">
     <div class="col-md-12 col-12">
     <h2 class="breadcrumb-title">Appointments</h2>
-    <nav aria-label="breadcrumb" class="page-breadcrumb">
-    <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Appointments</li>
-    </ol>
-    </nav>
+
     </div>
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="content">
     <div class="container-fluid">
     <div class="row">
     <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-     
+
     <div class="profile-sidebar">
-    <div class="widget-profile pro-widget-content">
-    <div class="profile-info-widget">
-    <a href="doctor-profile.html" class="booking-doc-img">
-    <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
-    </a>
-    <div class="profile-det-info">
-    <h3>Dr. Darren Elder</h3>
-    <div class="patient-details">
-    <h5 class="mb-0">BDS, MDS - Oral & Maxillofacial Surgery</h5>
-    </div>
-    </div>
-    </div>
-    </div>
+
     <div class="dashboard-widget">
         <nav class="dashboard-menu">
             @include('doctor_dashboard.links')
         </nav>
     </div>
     </div>
-    
+
     </div>
     <div class="col-md-7 col-lg-8 col-xl-9">
     <div class="appointments-detail">
     <div class="row">
-    
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -86,8 +69,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -123,8 +106,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -160,8 +143,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -197,8 +180,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -234,8 +217,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
      <div class="card-body">
@@ -271,8 +254,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -308,8 +291,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4 ">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -345,8 +328,8 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <div class="col-md-12 col-sm-6 col-lg-4">
     <div class="card widget-profile pat-widget-profile">
     <div class="card-body">
@@ -382,7 +365,7 @@
     </div>
     </div>
     </div>
-    
+
     </div>
     </div>
     </div>

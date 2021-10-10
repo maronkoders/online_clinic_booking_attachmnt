@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clinic;
 use App\Models\Practitioner;
+use App\Models\User;
 use App\Models\Specialisation;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,10 @@ class ServiceProviderController extends Controller
 {
     public function doctorDashboard()
     {
-        return view('doctor_dashboard.dashboard');
+        $totalPatients  = 0;
+        $totalAppointments =0;
+
+        return view('doctor_dashboard.dashboard')->with(['patients' => $totalPatients, 'appointments' => $totalAppointments]);
     }
 
     public function getPatients()
@@ -21,12 +25,16 @@ class ServiceProviderController extends Controller
 
     public function getAppointments()
     {
-        return view('doctor_dashboard.appointments');
+        $appointments = array();
+        return view('doctor_dashboard.appointments')->with(['appointment'=> $appointments]);
     }
 
     public function getProfile()
     {
-        return view('doctor_dashboard.profile');
+        $user_id = \Auth::user()->id;
+        $practitioner = Practitioner::with(['user','specialisation'])->where('user_id', $user_id)->first();
+        $specicalisation = Specialisation::all();
+        return view('doctor_dashboard.profile')->with(['practitioner'=> $practitioner,'specicalisation'=> $specicalisation]);
     }
 
     public function adminDashboard()
