@@ -36,6 +36,8 @@ Route::get('/clinic-details',[ServiceProviderController::class, 'clinicDetails']
 Route::post('/save_clinic',[AdminController::class,'addClinic']);
 Route::post('/save_specialisation',[AdminController::class, 'addSpecialisation']);
 Route::post('/save_practitioner',[AdminController::class, 'addPractitioner']);
+Route::post("/save_experience",[AdminController::class,'saveExperience']);
+Route::post("/save_education",[AdminController::class,'saveEducation']);
 //General
 Route::get('/login',[LoginController::class, 'loginView']);
 Route::post('/processLogin',[LoginController::class, 'processLogin']);

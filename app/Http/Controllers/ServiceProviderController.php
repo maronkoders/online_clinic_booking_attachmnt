@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Clinic;
 use App\Models\Practitioner;
+use App\Models\PractitionerExperience;
+use App\Models\PractitionerEducation;
 use App\Models\User;
 use App\Models\Specialisation;
 use Illuminate\Http\Request;
@@ -14,19 +16,21 @@ class ServiceProviderController extends Controller
     {
         $totalPatients  = 0;
         $totalAppointments =0;
+        $allPatients = array();
 
-        return view('doctor_dashboard.dashboard')->with(['patients' => $totalPatients, 'appointments' => $totalAppointments]);
+        return view('doctor_dashboard.dashboard')->with(['all_patients'=>$allPatients,'patients' => $totalPatients, 'appointments' => $totalAppointments]);
     }
 
     public function getPatients()
     {
-        return view('doctor_dashboard.patients');
+        $patients = array();
+        return view('doctor_dashboard.patients')->with(['patients'=> $patients]);
     }
 
     public function getAppointments()
     {
         $appointments = array();
-        return view('doctor_dashboard.appointments')->with(['appointment'=> $appointments]);
+        return view('doctor_dashboard.appointments')->with(['appointments'=> $appointments]);
     }
 
     public function getProfile()
@@ -34,7 +38,15 @@ class ServiceProviderController extends Controller
         $user_id = \Auth::user()->id;
         $practitioner = Practitioner::with(['user','specialisation'])->where('user_id', $user_id)->first();
         $specicalisation = Specialisation::all();
-        return view('doctor_dashboard.profile')->with(['practitioner'=> $practitioner,'specicalisation'=> $specicalisation]);
+        $experience  =  PractitionerExperience::where('practitioner_id',$practitioner->id)->get();
+        $education  =  PractitionerEducation::where('practitioner_id',$practitioner->id)->get();
+
+        return view('doctor_dashboard.profile')->with([
+            'practitioner'=> $practitioner,
+            'specicalisation'=> $specicalisation,
+            'experience' => $experience,
+            'education' => $education
+        ]);
     }
 
     public function adminDashboard()

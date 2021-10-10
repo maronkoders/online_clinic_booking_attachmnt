@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Clinic;
 use App\Models\Practitioner;
+use App\Models\PractitionerEducation;
+use App\Models\PractitionerExperience;
 use App\Models\Specialisation;
 use App\Models\User;
 use App\Models\UserType;
@@ -26,9 +28,40 @@ class AdminController extends Controller
 
         return redirect()->to('/clinic-details')
                ->withInput($request->input())
-               ->withErrors("errors", $this->errorBag());
+               ->withErrors("errors", $validator->errors());
     }
 
+    public function saveEducation(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'degree' => 'required',
+            'college' =>'required',
+            'completion_year'=>'required'
+        ]);
+
+        PractitionerEducation::create($request->all());
+
+        return redirect()->to('/doctor-profile')
+        ->withInput($request->input())
+        ->withErrors("errors", $validator->errors());
+    }
+
+
+    public function saveExperience(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'hospital_name' => 'required',
+            'designation' => 'required',
+            'from' => 'required',
+            'to' => 'required',
+        ]);
+
+        PractitionerExperience::create($request->all());
+
+        return redirect()->to('/doctor-profile')
+        ->withInput($request->input())
+        ->withErrors("errors", $validator->errors());
+    }
 
     public function addSpecialisation(Request $request)
     {
