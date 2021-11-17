@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Practitioner extends Model
 {
     use HasFactory;
-
     protected $fillable = ['user_id','specialisation_id','gender','file_name'];
+    protected $with =['user','specialisation'];
 
     public function specialisation()
     {

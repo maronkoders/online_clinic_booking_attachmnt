@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Practitioner;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
     public function searchView()
     {
-        return view('client.search');
+        $allPractitioners = Practitioner::all();
+        return view('client.search')->with(['practitioners' => $allPractitioners]);
     }
 
-    public function bookingView()
+    public function bookingView($id)
     {
-        return view('client.booking');
+         $practitioner_data = Practitioner::find($id);
+
+        return view('client.booking')->with(['data'=> $practitioner_data]);
     }
 
     public function checkoutView()

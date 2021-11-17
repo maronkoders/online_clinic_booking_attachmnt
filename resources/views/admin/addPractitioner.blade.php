@@ -27,7 +27,7 @@
 
 
 
-            <h4 class="sub-heading">Practitioner Practices</h4>
+            <h4 class="sub-heading">Practitioner Speciality</h4>
             <div class="card">
                 <form method="POST"  action="{{url('/save_specialisation')}}">
                     @csrf

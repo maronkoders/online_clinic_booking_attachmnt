@@ -10,13 +10,13 @@
              </span>
              </a>
              <a href="index.html" class="navbar-brand logo">
-             <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+             <img src="{{asset('uploads/psmi-logo.jpg')}}" class="img-fluid" alt="Logo" width="85px">
              </a>
           </div>
           <div class="main-menu-wrapper">
              <div class="menu-header">
                 <a href="index.html" class="menu-logo">
-                <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+                <img src="{{asset('uploads/psmi-logo.jpg')}}" class="img-fluid" alt="Logo"  width="85px">
                 </a>
                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
                 <i class="fas fa-times"></i>

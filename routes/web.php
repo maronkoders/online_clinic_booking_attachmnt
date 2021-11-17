@@ -8,11 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminController::class,'welcome']);
 
-
-//function () { return view('welcome'); });
 //patient
 Route::get('/search',[ClientController::class, 'searchView']);
-Route::get('/booking',[ClientController::class, 'bookingView']);
+Route::get('/booking/{id}',[ClientController::class, 'bookingView']);
 Route::get('/checkout',[ClientController::class, 'checkoutView']);
 Route::get('/dashboard',[ClientController::class, 'getDashboard']);
 Route::get('/medical-records',[ClientController::class, 'getMedicalRecords']);

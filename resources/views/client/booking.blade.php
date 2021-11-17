@@ -8,7 +8,7 @@
              <h2 class="breadcrumb-title">Booking</h2>
              <nav aria-label="breadcrumb" class="page-breadcrumb">
                 <ol class="breadcrumb">
-                   <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                   <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
                    <li class="breadcrumb-item active" aria-current="page">Booking</li>
                 </ol>
              </nav>
@@ -27,16 +27,9 @@
                       <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                       </a>
                       <div class="booking-info">
-                         <h4><a href="doctor-profile.html">Dr. Darren Elder</a></h4>
-                         <div class="rating">
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star filled"></i>
-                            <i class="fas fa-star"></i>
-                            <span class="d-inline-block average-rating">35</span>
-                         </div>
-                         <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+                         <h4><a href="doctor-profile.html">Dr. {{$data->user->name}} {{$data->user->surname}}</a></h4>
+
+                         <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Harare,Zimbabwe</p>
                       </div>
                    </div>
                 </div>
@@ -200,7 +193,7 @@
                 </div>
              </div>
              <div class="submit-section proceed-btn text-left">
-                <a href="checkout.html" class="btn btn-primary submit-btn">Proceed to Pay</a>
+                <a href="{{}}" class="btn btn-primary submit-btn">Proceed to Pay</a>
              </div>
           </div>
        </div>

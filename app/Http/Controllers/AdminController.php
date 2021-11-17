@@ -22,7 +22,9 @@ class AdminController extends Controller
             'address' => 'required',
             'city'=> 'required',
             'email'=>'required',
-            'phone'=>'required'
+            'phone'=>'required',
+            'working_hours' =>'required',
+            'working_days' =>'required'
         ]);
         $newClinic = Clinic::create($request->all());
 
@@ -79,10 +81,21 @@ class AdminController extends Controller
 
     public function addPractitioner(Request $request)
     {
-        $fileName = time().'_'.$request->file_name->getClientOriginalName();
-        $filePath = $request->file('file_name')->storeAs('uploads', $fileName, 'public');
-        $file_path = '/storage/' . $filePath;
-        $request['file_name'] =$file_path;
+        // $fileName = time().'_'.$request->file_name->getClientOriginalName();
+        // $filePath = $request->file('file_name')->storeAs('uploads', $fileName, 'public');
+        // $file_path = '/storage/' . $filePath;
+        // $request['file_name'] = $file_path;
+
+        $file = $request->file('file_name');
+        $file_name = $file->getClientOriginalName();
+        $file_ext = $file->getClientOriginalExtension();
+        $fileInfo = pathinfo($file_name);
+        $filename = $fileInfo['filename'];
+        $newname = $filename . "." . $file_ext;
+        $destinationPath =  'upload/media';
+        $file->move($destinationPath, $newname);
+        $filePath = url('/')."/".$destinationPath."/".$newname;
+        $request['file_name'] = $filePath;
 
         $userType = UserType::where('name', 'Practitioner')->first();
 
@@ -102,7 +115,9 @@ class AdminController extends Controller
 
     public function welcome(Request $request)
     {
-            return view('welcome');
+        $allSpecialisation = Specialisation::all();
+        $doctors = Practitioner::take(5)->get();
+        return view('welcome')->with(['specialisations' => $allSpecialisation ,'doctors' => $doctors]);
     }
 }
 

@@ -62,6 +62,67 @@
                         </div>
                      </div>
 
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label class="control-label">Days</label>
+
+                           <select  class="form-control" name="working_days">
+
+                            <option value="">
+                              Select Days
+                           </option>
+
+                            <option value="Monday-Friday" >
+                                 Monday - Friday
+
+                            </option>
+                            <option value="Monday-Saturday">
+
+                                Monday - Saturday
+
+                            </option>
+                            <option value="Monday-Sunday">
+
+                                Monday - Sunday
+
+                            </option>
+
+                           </select>
+
+                        </div>
+                     </div>
+
+                     <div class="col-md-6">
+                        <div class="form-group">
+                           <label class="control-label">Hours</label>
+
+                           <select  class="form-control" name="working_hours">
+
+                            <option value="">
+                                Select hours
+                           </option>
+
+                            <option value="08:00 - 16:00" >
+                                 08:00 - 16:00
+
+                            </option>
+                            <option value="08:00 - 16:30">
+
+                                08:00 - 16:30
+
+                            </option>
+                            <option value="08:00 - 13:00`">
+
+                                08:00 - 13:00
+
+                            </option>
+
+                           </select>
+
+                           {{-- <input type="email" name="email" class="form-control" @if(isset($clinic)) value="{{$clinic->email}}"  @else  value="{{ old('email') }}"  @endif > --}}
+                        </div>
+                     </div>
+
                   </div>
                </div>
             </div>
