@@ -23,11 +23,11 @@
              <div class="card">
                 <div class="card-body">
                    <div class="booking-doc-info">
-                      <a href="doctor-profile.html" class="booking-doc-img">
+                      <a href="javascript:void(0);" class="booking-doc-img">
                       <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                       </a>
                       <div class="booking-info">
-                         <h4><a href="doctor-profile.html">Dr. {{$data->user->name}} {{$data->user->surname}}</a></h4>
+                         <h4><a href="javascript:void(0);">Dr. {{$data->user->name}} {{$data->user->surname}}</a></h4>
 
                          <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Harare,Zimbabwe</p>
                       </div>
@@ -39,17 +39,17 @@
                    <div class="date-booking">
                       <div class="row align-items-center">
                          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
-                            <h4 class="mb-0">11 November 2021</h4>
+                            <h4 class="mb-0">{{now()->format('d-F-Y')}}</h4>
                          </div>
                          <div class="col-12 col-sm-6 col-md-2 col-lg-4 text-sm-center">
-                            <p class="text-muted mb-0">Monday</p>
+                            {{-- <p class="text-muted mb-0">{{now()->format('l')}}</p> --}}
                          </div>
                          <div class="col-12 col-sm-8 col-md-6 col-lg-4 text-md-right">
-                            <div class="bookingrange btn btn-white btn-sm">
+                            {{-- <div class="bookingrange btn btn-white btn-sm">
                                <i class="far fa-calendar-alt mr-2"></i>
                                <span></span>
                                <i class="fas fa-chevron-down ml-2"></i>
-                            </div>
+                            </div> --}}
                          </div>
                       </div>
                    </div>
@@ -59,48 +59,14 @@
                       <div class="col-md-12">
                          <div class="day-slot">
                             <ul>
-                               <li>
-                                  <div class="days">
-                                     <span>Mon</span>
-                                     <span class="slot-date">11 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
-                               <li>
-                                  <div class="days">
-                                     <span>Tue</span>
-                                     <span class="slot-date">12 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
-                               <li>
-                                  <div class="days">
-                                     <span>Wed</span>
-                                     <span class="slot-date">13 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
-                               <li>
-                                  <div class="days">
-                                     <span>Thu</span>
-                                     <span class="slot-date">14 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
-                               <li>
-                                  <div class="days">
-                                     <span>Fri</span>
-                                     <span class="slot-date">15 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
-                               <li>
-                                  <div class="days">
-                                     <span>Sat</span>
-                                     <span class="slot-date">16 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
-                               <li>
-                                  <div class="days">
-                                     <span>Sun</span>
-                                     <span class="slot-date">17 Nov <small class="slot-year">2019</small></span>
-                                  </div>
-                               </li>
+
+                                @foreach($working_days as  $day)
+                                 <li>
+                                    <div class="days">
+                                       <span>{{$day}}</span>
+                                    </div>
+                                 </li>
+                                @endforeach
                             </ul>
                          </div>
                       </div>
@@ -109,83 +75,24 @@
                       <div class="col-md-12">
                          <div class="time-slot">
                             <ul class="clearfix">
-                               <li>
-                                  <a class="timing" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a class="timing selected" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing selected" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing selected" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a class="timing" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a class="timing" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a class="timing" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a class="timing" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
-                               <li>
-                                  <a class="timing" href="#">
-                                  <span>9:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>10:00</span> <span>AM</span>
-                                  </a>
-                                  <a class="timing" href="#">
-                                  <span>11:00</span> <span>AM</span>
-                                  </a>
-                               </li>
+
+
+                                @foreach($working_days as  $day)
+                                <li>
+                                 @if(isset($working_hours[$day]))
+
+                                        @foreach ($working_hours[$day] as  $t)
+                                                    <a class="timing" href="javascript:void(0);">
+                                                    <span>{{$t}}</span> <span>HRS</span>
+                                                    </a>
+
+                                        @endforeach
+                                 @endif
+                                </li>
+                               @endforeach
+
+
+
                             </ul>
                          </div>
                       </div>
@@ -199,7 +106,5 @@
        </div>
     </div>
  </div>
-
-
 
 @endsection

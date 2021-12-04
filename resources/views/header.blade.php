@@ -9,13 +9,13 @@
              <span></span>
              </span>
              </a>
-             <a href="index.html" class="navbar-brand logo">
+             <a href="{{url('/')}}" class="navbar-brand logo">
              <img src="{{asset('uploads/psmi-logo.jpg')}}" class="img-fluid" alt="Logo" width="85px">
              </a>
           </div>
           <div class="main-menu-wrapper">
              <div class="menu-header">
-                <a href="index.html" class="menu-logo">
+                <a href="{{url('/')}}" class="menu-logo">
                 <img src="{{asset('uploads/psmi-logo.jpg')}}" class="img-fluid" alt="Logo"  width="85px">
                 </a>
                 <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -34,6 +34,13 @@
           <ul class="nav header-navbar-rht">
 
             @guest
+
+             @if (Request::path() != "/")
+                <li class="nav-item">
+                    <a class="nav-link header-login" href="{{url('/')}}">Home</a>
+                </li>
+             @endif
+
              <li class="nav-item">
                 <a class="nav-link header-login" href="{{url('/login')}}">Login</a>
              </li>

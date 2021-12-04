@@ -155,7 +155,7 @@
                               <div class="col-12 col-md-6 col-lg-4">
                                  <div class="form-group">
                                     <label>Degree</label>
-                                    <input type="text"  name ="degree" class="form-control">
+                                    <input type="text"  name="degree" class="form-control">
                                  </div>
                               </div>
                               <div class="col-12 col-md-6 col-lg-4">

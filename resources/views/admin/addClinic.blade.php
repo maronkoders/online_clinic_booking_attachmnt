@@ -102,16 +102,12 @@
                                 Select hours
                            </option>
 
-                            <option value="08:00 - 16:00" >
+                            <option value="08:00 - 16:00">
                                  08:00 - 16:00
 
                             </option>
-                            <option value="08:00 - 16:30">
 
-                                08:00 - 16:30
-
-                            </option>
-                            <option value="08:00 - 13:00`">
+                            <option value="08:00 - 13:00">
 
                                 08:00 - 13:00
 
@@ -119,7 +115,7 @@
 
                            </select>
 
-                           {{-- <input type="email" name="email" class="form-control" @if(isset($clinic)) value="{{$clinic->email}}"  @else  value="{{ old('email') }}"  @endif > --}}
+
                         </div>
                      </div>
 

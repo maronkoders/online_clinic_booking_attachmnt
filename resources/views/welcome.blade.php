@@ -57,9 +57,6 @@
                 <h2>Available Features in <span>Our Clinic</span></h2>
                 <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
              </div>
-             <div class="about-content">
-                <img src="assets/img/feature.png" class="img-fluid" alt="feature">
-             </div>
           </div>
           <div class="col-lg-7">
              <div class="feature-list">
@@ -68,7 +65,7 @@
                       <div class="feature-box">
 
                          <div class="feature-content">
-                            <h3><a href="search.html">Operation</a></h3>
+                            <h3><a href="javascript:void(0);">Operation</a></h3>
                          </div>
                       </div>
                    </div>
@@ -76,7 +73,7 @@
                       <div class="feature-box">
 
                          <div class="feature-content">
-                            <h3><a href="search.html">Medical</a></h3>
+                            <h3><a href="javascript:void(0);">Medical</a></h3>
                          </div>
                       </div>
                    </div>
@@ -84,7 +81,7 @@
                       <div class="feature-box">
 
                          <div class="feature-content">
-                            <h3><a href="search.html">Patient Ward</a></h3>
+                            <h3><a href="javascript:void(0);">Patient Ward</a></h3>
                          </div>
                       </div>
                    </div>
@@ -92,7 +89,7 @@
                       <div class="feature-box">
 
                          <div class="feature-content">
-                            <h3><a href="search.html">Test Room</a></h3>
+                            <h3><a href="javascript:void(0);">Test Room</a></h3>
                          </div>
                       </div>
                    </div>
@@ -100,7 +97,7 @@
                       <div class="feature-box">
 
                          <div class="feature-content">
-                            <h3><a href="search.html">ICU</a></h3>
+                            <h3><a href="javascript:void(0);">ICU</a></h3>
                          </div>
                       </div>
                    </div>

@@ -46,9 +46,7 @@
 
                                      </div>
                                   </div>
-                                  <div class="graph">
-                                     <img src="assets/img/icons/icon-01.png" class="img-fluid" alt="patient">
-                                  </div>
+
                                </div>
                             </div>
                             <div class="col-md-12 col-lg-4">
@@ -60,9 +58,7 @@
 
                                      </div>
                                   </div>
-                                  <div class="graph">
-                                     <img src="assets/img/icons/icon-02.png" class="img-fluid" alt="patient">
-                                  </div>
+
                                </div>
                             </div>
                             <div class="col-md-12 col-lg-4">
@@ -74,9 +70,7 @@
 
                                      </div>
                                   </div>
-                                  <div class="graph">
-                                     <img src="assets/img/icons/icon-03.png" class="img-fluid" alt="patient">
-                                  </div>
+
                                </div>
                             </div>
                          </div>
@@ -140,7 +134,7 @@
                                </div>
                             </div>
                          </div>
-                        
+
                       </div>
                    </div>
                 </div>

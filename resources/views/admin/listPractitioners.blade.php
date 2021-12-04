@@ -46,8 +46,10 @@
                                      <table class="table table-hover table-center mb-0">
                                         <thead>
                                            <tr>
-                                              <th> Name</th>
+                                              <th>Name</th>
                                               <th>Surname</th>
+                                              <th>Email</th>
+                                              <th>Gender</th>
                                               <th>Specialisation</th>
 
                                               {{-- <th>Actions</th> --}}
@@ -60,15 +62,20 @@
                                                    <h2 class="table-avatar">
                                                       {{-- <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a> --}}
                                                      {{$item->user->name}}
-
-
-
-
                                                    </h2>
                                                 </td>
                                                 <td>
-
                                                     {{$item->user->surname}}
+                                                </td>
+
+                                                <td>
+                                                    {{$item->user->email}}
+                                                </td>
+
+                                                <td>
+
+
+                                                    {{$item->gender}}
                                                 </td>
 
 
@@ -87,14 +94,7 @@
                                                    </div>
                                                 </td> --}}
                                              </tr>
-
-
                                             @endforeach
-
-
-
-
-
 
                                         </tbody>
                                      </table>
@@ -102,7 +102,6 @@
                                </div>
                             </div>
                          </div>
-
                       </div>
                    </div>
                 </div>

@@ -17,6 +17,8 @@ class AdminController extends Controller
 {
     public function addClinic(Request $request)
     {
+
+        dd("incoming", $request->all());
         $request->validate([
             'name' => 'required',
             'address' => 'required',
@@ -41,11 +43,13 @@ class AdminController extends Controller
             'completion_year'=>'required'
         ]);
 
+
         PractitionerEducation::create($request->all());
 
-        return redirect()->to('/doctor-profile')
-        ->withInput($request->input())
-        ->withErrors("errors", $validator->errors());
+        return redirect()->to('/doctor-profile');
+
+                // ->withInput($request->input())
+                // ->withErrors("errors", $validator->errors());
     }
 
 
@@ -81,21 +85,10 @@ class AdminController extends Controller
 
     public function addPractitioner(Request $request)
     {
-        // $fileName = time().'_'.$request->file_name->getClientOriginalName();
-        // $filePath = $request->file('file_name')->storeAs('uploads', $fileName, 'public');
-        // $file_path = '/storage/' . $filePath;
-        // $request['file_name'] = $file_path;
-
-        $file = $request->file('file_name');
-        $file_name = $file->getClientOriginalName();
-        $file_ext = $file->getClientOriginalExtension();
-        $fileInfo = pathinfo($file_name);
-        $filename = $fileInfo['filename'];
-        $newname = $filename . "." . $file_ext;
-        $destinationPath =  'upload/media';
-        $file->move($destinationPath, $newname);
-        $filePath = url('/')."/".$destinationPath."/".$newname;
-        $request['file_name'] = $filePath;
+        $fileName = time().'_'.$request->file_name->getClientOriginalName();
+        $filePath = $request->file('file_name')->storeAs('uploads', $fileName, 'public');
+        $file_path = '/storage/' . $filePath;
+        $request['file_name'] = $file_path;
 
         $userType = UserType::where('name', 'Practitioner')->first();
 
@@ -109,7 +102,7 @@ class AdminController extends Controller
 
         $request['user_id'] = $newUser->id;
         Practitioner::create($request->except('_token'));
-        return redirect()->to('/add-practitioner')->with('status', 'Record saved');
+        return redirect()->to('/add-practitioner')->with('status', 'Practitioner record saved');
 
     }
 
