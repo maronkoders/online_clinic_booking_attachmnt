@@ -14,6 +14,7 @@ class CreatePractitionerSlotsTable extends Migration
             $table->string('day');
             $table->string('time');
             $table->foreignId('practitioner_id')->constrained('practitioners');
+            $table->foreignId('patient_id')->constrained('users');
             $table->timestamps();
         });
     }

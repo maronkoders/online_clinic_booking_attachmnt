@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PractitionerSlot extends Model
+class ClientBank extends Model
 {
     use HasFactory;
 
-    public function users()
-    {
-        return $this->belongsTo(User::class,'patient_id','id');
-    }
+    protected $fillable = ['bank_name','branch_name','account_name','account_number','user_id','balance'];
 }

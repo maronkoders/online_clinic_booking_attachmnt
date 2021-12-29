@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PractitionerSlot extends Model
+class ClinicPatient extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id','gender'];
+
+
     public function users()
     {
-        return $this->belongsTo(User::class,'patient_id','id');
+         return $this->belongsTo(User::class,'user_id','id');
     }
 }

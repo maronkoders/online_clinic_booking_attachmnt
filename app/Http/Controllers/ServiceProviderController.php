@@ -3,19 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clinic;
+use App\Models\ClinicPatient;
 use App\Models\Practitioner;
 use App\Models\PractitionerExperience;
 use App\Models\PractitionerEducation;
+use App\Models\PractitionerSlot;
 use App\Models\User;
 use App\Models\Specialisation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceProviderController extends Controller
 {
+    protected $patients;
+    protected $practitioner;
+
+    public function __construct()
+    {
+        $this->patients =  ClinicPatient::with('users')->get();
+        $this->practitioners = Practitioner::all();
+    }
+
+    public function newPatient()
+    {
+        return view('admin.newPatient');
+    }
+
+    public function clinicPatients()
+    {
+        $allPatients  =$this->patients;
+        
+        return view('admin.clinicPatients')->with(['patients' => $allPatients]);
+    }
+
     public function doctorDashboard()
     {
-        $totalPatients  = 0;
-        $totalAppointments =0;
+        $practitioner = Practitioner::where('user_id', Auth::user()->id)->first();
+        $totalAppointments = PractitionerSlot::with('users')->where('practitioner_id', $practitioner->id)->count();
+
+        $totalPatients  = count($this->patients);
         $allPatients = array();
 
         return view('doctor_dashboard.dashboard')->with(['all_patients'=>$allPatients,'patients' => $totalPatients, 'appointments' => $totalAppointments]);
@@ -23,14 +49,17 @@ class ServiceProviderController extends Controller
 
     public function getPatients()
     {
-        $patients = array();
+        $practitioner = Practitioner::where('user_id', Auth::user()->id)->first();
+        $patients =  PractitionerSlot::with('users')->where('practitioner_id', $practitioner->id)->get();
         return view('doctor_dashboard.patients')->with(['patients'=> $patients]);
     }
 
     public function getAppointments()
     {
-        $appointments = array();
-        return view('doctor_dashboard.appointments')->with(['appointments'=> $appointments]);
+        $practitioner = Practitioner::where('user_id', Auth::user()->id)->first();
+        $appnt = PractitionerSlot::with('users')->where('practitioner_id', $practitioner->id)->get();
+        $clinic = Clinic::first();
+        return view('doctor_dashboard.appointments')->with(['appointments'=> $appnt,'clinic'=>$clinic]);
     }
 
     public function getProfile()
@@ -52,8 +81,8 @@ class ServiceProviderController extends Controller
     public function adminDashboard()
     {
 
-        $totalPractitioners = 0;
-        $totalPatients = 0;
+        $totalPractitioners = count($this->practitioners);
+        $totalPatients = count($this->patients);
         $totalAppointments = 0;
         $all_patients  = array();
         return view('admin.dashboard')

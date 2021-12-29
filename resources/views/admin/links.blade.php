@@ -7,6 +7,16 @@
        <i class="feather-airplay"></i>
        </a>
     </li>
+
+    <li  @if (Request::path() =="clinic-patients")
+    class="active"
+@endif >
+    <a href="{{url('/clinic-patients')}}">
+     <span>Clinic Patients</span>
+     <i class="fas fa-user-injured"></i>
+     </a>
+  </li>
+
     <li  @if (Request::path() =="add-practitioner")
     class="active"
 @endif >

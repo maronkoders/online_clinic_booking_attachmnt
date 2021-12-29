@@ -26,6 +26,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials))
         {
+            session(['user_id' => Auth::user()->id]);
             return $this->redirectIntenedUser(Auth::user()->user_type_id);
         }
 

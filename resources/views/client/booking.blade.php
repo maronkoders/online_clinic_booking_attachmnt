@@ -27,7 +27,7 @@
                       <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                       </a>
                       <div class="booking-info">
-                         <h4><a href="javascript:void(0);">Dr. {{$data->user->name}} {{$data->user->surname}}</a></h4>
+                         <h4><a href="javascript:void(0);">Dr. {{ucfirst($data->user->name)}} {{ucfirst($data->user->surname)}}</a></h4>
 
                          <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Harare,Zimbabwe</p>
                       </div>
@@ -83,7 +83,10 @@
 
                                         @foreach ($working_hours[$day] as  $t)
                                                     <a class="timing" href="javascript:void(0);">
-                                                    <span>{{$t}}</span> <span>HRS</span>
+                                                        <span>
+                                                            <input  onclick="selectedTime(event, '{{$day}}')" type="radio" name="selected_time" value="{{$t}}"/>
+                                                            {{$t}}</span> <span>HRS
+                                                        </span>
                                                     </a>
 
                                         @endforeach
@@ -92,19 +95,105 @@
                                @endforeach
 
 
-
                             </ul>
+                            <span style="color:red;" id="time_error">
+                                Select Time to proceed
+                          </span>
                          </div>
                       </div>
                    </div>
                 </div>
              </div>
+
+
              <div class="submit-section proceed-btn text-left">
-                <a href="{{}}" class="btn btn-primary submit-btn">Proceed to Pay</a>
+                <div class="col-md-12 col-lg-12">
+                    <div class="card book-info">
+                       <form>
+                          <div class="info-widget">
+                             <div class="card-header">
+                                <h4 class="card-title">Personal Information</h4>
+                             </div>
+                             <div class="card-body">
+                                <div class="row">
+                                   <div class="col-md-12 col-sm-12">
+                                      <div class="form-group">
+                                         <label>Client ID</label>
+                                         <input class="form-control" type="text" name="client_id"  id="client_id">
+                                         <span style="color:red;" id="error_message">
+                                                Enter your Client Id to proceed.
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </form>
+                    </div>
+                 </div>
+             </div>
+
+
+
+             <div class="submit-section proceed-btn text-left">
+                <a href="javascript:void(0);"  onclick="setAppointment(event,'{{$data->id}}')" class="btn btn-primary submit-btn">Set Appointment</a>
              </div>
           </div>
        </div>
     </div>
  </div>
 
+
+ <script>
+     function selectedTime(t, day)
+     {
+        localStorage.setItem('appointment_time', t.target.value);
+        localStorage.setItem('appointment_day', day);
+     }
+
+     function setAppointment(e, drId)
+     {
+         event.preventDefault();
+        let clientId = document.getElementById('client_id').value;
+        if( localStorage.getItem('appointment_time') !=  null)
+        {
+
+            document.getElementById('time_error').style.visibility = "hidden";
+        }
+
+
+        if(clientId!='')
+          {
+               document.getElementById('error_message').style.visibility = "hidden";
+               let formData =
+                {
+                    _token: "{{ csrf_token() }}",
+                    id :drId,
+                    time : localStorage.getItem('appointment_time'),
+                    day : localStorage.getItem('appointment_day'),
+                    client_id : clientId
+                }
+
+                $.ajax({
+                type: "POST",
+                url:"{{url('set-appointment')}}",
+                dataType:"application/json",
+                data:formData,
+                success: function(response){
+
+                    console.log("message", response)
+
+                    if(response.status ==200)
+                    {
+                        window.origin.href ="/appointment_booked";
+                    }
+                    if(response.status ==404){
+                        document.getElementById('error_message').style.visibility = "visible";
+                        document.getElementById('error_message').innerText = response.message;
+                    }
+                }
+            });
+          }
+     }
+</script>
 @endsection

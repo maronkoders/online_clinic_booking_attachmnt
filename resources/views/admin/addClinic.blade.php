@@ -24,6 +24,32 @@
          </div>
          <div class="col-md-7 col-lg-8 col-xl-9 basic-info">
 
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
+
+            @if (session('error'))
+            <div class="alert alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if(count($errors) > 0 )
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <ul class="p-0 m-0" style="list-style: none;">
+                @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
             <form  action="{{url('save_clinic')}}" method="POST">
                 @csrf
 
@@ -62,7 +88,7 @@
                         </div>
                      </div>
 
-                     <div class="col-md-6">
+                     <div class="col-md-4">
                         <div class="form-group">
                            <label class="control-label">Days</label>
 
@@ -92,7 +118,7 @@
                         </div>
                      </div>
 
-                     <div class="col-md-6">
+                     <div class="col-md-4">
                         <div class="form-group">
                            <label class="control-label">Hours</label>
 
@@ -119,15 +145,27 @@
                         </div>
                      </div>
 
+                     <div class="col-md-4">
+                        <div class="form-group">
+
+                           <label>consultation fee</label>
+                            <input type="text"  name="consultation_fee"  class="form-control" @if(isset($clinic)) value="{{$clinic->consultation_fee}}"  @else  value="{{ old('consultation_fee') }}"  @endif >
+
+
+                        </div>
+                     </div>
+
                   </div>
                </div>
             </div>
+
+            <div class="submit-section submit-btn-bottom">
+                <button type="submit" class="btn btn-primary submit-btn">Save Clinic Changes</button>
+             </div>
         </form>
 
 
-            <div class="submit-section submit-btn-bottom">
-               <button type="submit" class="btn btn-primary submit-btn">Save Clinic Changes</button>
-            </div>
+
 
          </div>
       </div>

@@ -4,7 +4,7 @@
    <div class="container-fluid">
       <div class="row align-items-center">
          <div class="col-md-12 col-12">
-            <h2 class="breadcrumb-title">Practitioners</h2>
+            <h2 class="breadcrumb-title">New Patient</h2>
          </div>
       </div>
    </div>
@@ -27,10 +27,9 @@
 
 
 
-            <h4 class="sub-heading">Practitioner Speciality</h4>
-            <div class="card">
-                <form method="POST"  action="{{url('/save_specialisation')}}">
-                    @csrf
+            <h4 class="sub-heading">Patient Info</h4>
+
+
                <div class="card-body">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -58,30 +57,13 @@
                </div>
                @endif
 
-                  <div class="registrations-info">
-                     <div class="row form-row reg-cont">
-                        <div class="col-12 col-md-12">
-                           <div class="form-group">
-                              <label>Name</label>
-                              <input type="text" name="specialisation_name" id="specialisation_name" class="form-control">
-
-
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="add-more">
-                    <button type="submit" class="btn btn-primary submit-btn"><i class="fa fa-plus-circle"></i> Add New</button>
-                     {{-- <a href="javascript:void(0);" onclick ="addSpecialisation(event)" class="add-reg"><i class="fa fa-plus-circle"></i> Add New</a> --}}
-                  </div>
-               </div>
-                </form>
             </div>
 
 
-            <h4 class="sub-heading">Practitioner  Information</h4>
-            <form  enctype="multipart/form-data" method="POST" action="{{url('/save_practitioner')}}">
+
+            <form  enctype="multipart/form-data" method="POST" action="{{url('/save_patient_data')}}">
              @csrf
+
 
             <div class="card">
                <div class="card-body">
@@ -89,13 +71,13 @@
                      <div class="col-md-6">
                         <div class="form-group">
                            <label>First Name <span class="text-danger">*</span></label>
-                           <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control">
+                           <input type="text" name="name"  value="{{ old('name') }}"  class="form-control">
                         </div>
                      </div>
                      <div class="col-md-6">
                         <div class="form-group">
                            <label>Last Name <span class="text-danger">*</span></label>
-                           <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control">
+                           <input type="text" name="surname" value="{{ old('surname') }}"  class="form-control">
                         </div>
                      </div>
                      {{-- <div class="col-md-6">
@@ -104,47 +86,31 @@
                            <input type="text" name="phone" class="form-control">
                         </div>
                      </div> --}}
-                     <div class="col-md-6 col-lg-4">
+                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                            <label>Gender</label>
                            <select class="form-control select" name="gender">
-                              <option  value="Male">Male</option>
-                              <option  value="Female">Female</option>
+                              <option  value="male">Male</option>
+                              <option  value="female">Female</option>
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-6 col-lg-4">
+                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                            <label>Email</label>
-                           <input type="email"  required name="email" value="{{ old('email') }}" class="form-control">
+                           <input type="email" name="email" value="{{ old('email') }}"   class="form-control">
                         </div>
                      </div>
-                     <div class="col-md-6 col-lg-4">
-                        <div class="form-group">
-                           <label>Specialisation</label>
-                           <select class="form-control select" name="specialisation_id">
 
-                               @foreach ($specialisation as $item )
-                               <option value="{{$item->id}}">{{ucfirst($item->specialisation_name)}}</option>
-                               @endforeach
-                         </select>
-                        </div>
-                     </div>
-                     <div class="col-md-12 col-lg-12">
-
-                        <input type="file" name="file_name"  value="{{ old('file_name') }}" class="custom-file" >
-                        <p class="mb-0" style="margin-top:10px;">Image size is 35px x 35px</p>
-
-                     </div>
                   </div>
                </div>
             </div>
 
             <div class="submit-section submit-btn-bottom">
-               <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+               <button type="submit" class="btn btn-primary submit-btn">Save</button>
             </div>
         </form>
-         </div>
+
       </div>
    </div>
 </div>

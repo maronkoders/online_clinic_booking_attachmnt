@@ -16,6 +16,7 @@ class CreateClinicsTable extends Migration
             $table->string("city");
             $table->string("phone")->unique();
             $table->string("email")->umique();
+            $table->decimal("consultation_fee", 10,2);
             $table->timestamps();
         });
     }

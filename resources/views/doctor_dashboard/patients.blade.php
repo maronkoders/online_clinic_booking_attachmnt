@@ -36,23 +36,27 @@
                       <div class="card-body">
                          <div class="pro-widget-content">
                             <div class="profile-info-widget">
-                               <a href="patient-profile.html" class="booking-doc-img">
-                               <img src="assets/img/patients/patient1.jpg" alt="User Image">
-                               </a>
+
                                <div class="profile-det-info">
-                                  <h3><a href="patient-profile.html">Charlene Reed</a></h3>
+                                  <h3><a href="patient-profile.html">{{$item->users->name}} {{$item->users->surname}}</a></h3>
                                   <div class="patient-details">
-                                     <h5 class="pat-id">Patient ID :<span> P0001</span></h5>
-                                     <h5 class="mb-0"><i class="feather-map-pin"></i> North Carolina, USA</h5>
+                                     {{-- <h5 class="pat-id">Patient ID :<span> </span></h5> --}}
+                                     <h5 class="mb-0"><i class="feather-map-pin"></i> Zimbabwe</h5>
                                   </div>
                                </div>
                             </div>
                          </div>
                          <div class="patient-info">
                             <ul>
-                               <li>Phone <span>+1 828 632 9170</span></li>
-                               <li>Age <span>29 Years, Female</span></li>
-                               <li>Blood Group <span>O+</span></li>
+                               <li>Email <span>{{$item->users->email}}</span></li>
+                               {{-- <li>Gender <span>{{$item->users->gender}}</span></li> --}}
+                               <li>
+
+                                <a href="{{url('patient_info/'.$item->patient_id)}}">
+                                    VIEW MORE
+                                </a>
+
+                                  </li>
                             </ul>
                          </div>
                       </div>

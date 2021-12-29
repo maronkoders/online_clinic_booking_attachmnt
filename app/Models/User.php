@@ -19,6 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'user_type_id',
         'email',
         'password',
     ];
@@ -45,5 +47,15 @@ class User extends Authenticatable
     public function practitioner()
     {
          return $this->hasMany(Practitioner::class, 'id','user_id');
+    }
+
+    public function patient()
+    {
+        return $this->hasOne(ClinicPatient::class,'id','user_id');
+    }
+
+    public function practitionerSlot(Type $var = null)
+    {
+        return $this->hasMany(PractitionerSlot::class,'id','patient_id');
     }
 }
