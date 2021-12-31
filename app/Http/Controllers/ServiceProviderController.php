@@ -22,6 +22,7 @@ class ServiceProviderController extends Controller
     {
         $this->patients =  ClinicPatient::with('users')->get();
         $this->practitioners = Practitioner::all();
+        $this->appointmentSlots = PractitionerSlot::all();
     }
 
     public function newPatient()
@@ -32,7 +33,7 @@ class ServiceProviderController extends Controller
     public function clinicPatients()
     {
         $allPatients  =$this->patients;
-        
+
         return view('admin.clinicPatients')->with(['patients' => $allPatients]);
     }
 
@@ -83,14 +84,15 @@ class ServiceProviderController extends Controller
 
         $totalPractitioners = count($this->practitioners);
         $totalPatients = count($this->patients);
-        $totalAppointments = 0;
-        $all_patients  = array();
+        $totalAppointments = count($this->appointmentSlots);
+        $allAppnts  = PractitionerSlot::with('users')->get();
+
         return view('admin.dashboard')
                     ->with([
                             'total_practitioners'=> $totalPractitioners,
                             'total_patients'=> $totalPatients,
                             'total_appointment'=> $totalAppointments,
-                            'all_patients'=> $all_patients]);
+                            'appointments'=> $allAppnts]);
     }
 
     public function addPractitioner()

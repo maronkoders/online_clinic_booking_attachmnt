@@ -22,7 +22,11 @@
                         <i class="feather-map-pin"></i> Harare, Zimbabwe
                      </li>
                      <li>
-                        <i class="far fa-calendar"></i> Available on Fri, 22 Mar
+                        <i class="far fa-calendar"></i>
+                        @if(!is_null($clinic))
+                        {{$clinic->working_days}}
+                        @endif
+
                      </li>
                   </ul>
                   <div class="profile-btn-list">

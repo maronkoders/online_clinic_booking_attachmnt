@@ -155,7 +155,9 @@ class AdminController extends Controller
     {
         $allSpecialisation = Specialisation::all();
         $doctors = Practitioner::take(5)->get();
-        return view('welcome')->with(['specialisations' => $allSpecialisation ,'doctors' => $doctors]);
+        $clinicData  = Clinic::first();
+
+        return view('welcome')->with(['specialisations' => $allSpecialisation ,'doctors' => $doctors ,'clinic' => $clinicData]);
     }
 }
 

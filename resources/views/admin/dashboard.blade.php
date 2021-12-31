@@ -94,40 +94,39 @@
                                               <th>Patient Name</th>
                                               <th>Appt Date</th>
                                               <th>Purpose</th>
-                                              <th>Type</th>
-                                              <th>Paid Amount</th>
-                                              <th>Actions</th>
+                                              {{-- <th>Type</th> --}}
+                                              <th>Paid</th>
+                                              {{-- <th>Actions</th> --}}
                                            </tr>
                                         </thead>
                                         <tbody>
-                                           <tr>
-                                              <td>
-                                                 <h2 class="table-avatar">
-                                                    <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
-                                                    <a href="patient-profile.html">Richard Wilson <span>#PT0016</span></a>
-                                                 </h2>
-                                              </td>
-                                              <td>11 Nov 2021 <span class="d-block text-info apt-time">10.00 AM</span></td>
-                                              <td>General</td>
-                                              <td>New Patient</td>
-                                              <td>$150</td>
-                                              <td class="text-left">
-                                                 <div class="table-action">
-                                                    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                                    <i class="feather-eye"></i>
-                                                    </a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                                    <i class="feather-check-circle"></i>
-                                                    </a>
-                                                    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                                    <i class="feather-x-circle"></i>
-                                                    </a>
-                                                 </div>
-                                              </td>
-                                           </tr>
+                                            @foreach ($appointments as $appnt)
+                                            <tr>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="javascript:void(0);">{{$appnt->users->name}} {{$appnt->users->surname}} <span>
+                                                        </span></a>
+                                                    </h2>
+                                                </td>
+                                                <td> {{$appnt->day}}-{{$appnt->created_at->format('d-F-Y')}} <span class="d-block text-info apt-time">{{$appnt->time}}</span></td>
+                                                <td>General</td>
+                                                <td>YES</td>
+                                                {{-- <td class="text-left">
+                                                    <div class="table-action">
+                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                        <i class="feather-eye"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                        <i class="feather-check-circle"></i>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                        <i class="feather-x-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </td> --}}
+                                            </tr>
 
-
-
+                                           @endforeach
                                         </tbody>
                                      </table>
                                   </div>

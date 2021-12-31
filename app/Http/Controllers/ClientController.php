@@ -10,6 +10,7 @@ use App\Models\ClinicPatient;
 use App\Models\Practitioner;
 use App\Models\PractitionerSlot;
 use App\Models\prescription;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,7 @@ class ClientController extends Controller
     //     $this->clientRecord = ClinicPatient::where('user_id', session('user_id'))->first();
     // }
 
-
+        const days =  ['Monday' ,'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
     public function searchView()
     {
@@ -90,41 +91,82 @@ class ClientController extends Controller
         return view('client.addBank');
     }
 
+    private function plotAvailability($workingDays, $workingHours)
+    {
+        $slots = [];
+        foreach($workingDays as $s)
+        {
+            $availableHours[$s] = $workingHours;
+        }
+        return $slots;
+    }
+
     public function bookingView($id)
     {
         $practitioner_data = Practitioner::find($id);
-        $slot = PractitionerSlot::where('practitioner_id',$id)->get()->groupBy('day');
-        $clinic = Clinic::first();
-        $clinic_data['working_days']  = explode('-',$clinic->working_days);
-        $clinic_data['working_hours'] = explode('-',$clinic->working_hours);
-        $workingDays  = $this->getBusinessDays($clinic_data);
-        $workingHours = $this->workingHours($clinic_data);
 
-        $availableHours = [];
-
-        if(count($slot) > 0)
+        if(!is_null($practitioner_data))
         {
-            foreach($slot as $s => $k)
+            $slot = PractitionerSlot::where('practitioner_id',$id)->get()->groupBy('day');
+            $clinic = Clinic::first();
+            $clinic_data['working_days']  = explode('-',$clinic->working_days);
+            $clinic_data['working_hours'] = explode('-',$clinic->working_hours);
+            $workingDays  = $this->getBusinessDays($clinic_data);
+
+
+            $workingHours = $this->workingHours($clinic_data);
+            $allHours  = $workingHours;
+            $availableHours = [];
+
+            if(count($slot) > 0)
             {
-                foreach($k as $value)
+                foreach($slot as $s => $k)
+                    {
+                        foreach($workingDays as $day)
+                            {
+                                if($day == $s)
+                                {
+                                    foreach($k as $value)
+                                    {
+                                        $index = array_search($value->time,$workingHours);
+                                        if($index !== false)
+                                        {
+                                            unset($workingHours[$index]);
+                                            $availableHours[$s] = $workingHours;
+                                        }
+                                    }
+                                }else{
+                                    $availableHours[$day] = $allHours;
+                                }
+                            }
+                    }
+            }else{
+                foreach($workingDays as $s)
                 {
-                    $index = array_search($value->time,$workingHours);
-                    if($index !== false)
-                       {
-                            unset($workingHours[$index]);
-                           $availableHours[$s] = $workingHours;
-                       }
+                    $availableHours[$s] = $workingHours;
                 }
             }
 
+            return view('client.booking')->with(['data'=> $practitioner_data ,'slot'=> $slot ,'working_days' => $workingDays ,'working_hours'=> $availableHours]);
         }else{
-            foreach($workingDays as $s)
-            {
-                $availableHours[$s] = $workingHours;
-            }
+            return view("client.404");
         }
+    }
 
-        return view('client.booking')->with(['data'=> $practitioner_data ,'slot'=> $slot ,'working_days' => $workingDays ,'working_hours'=> $availableHours]);
+    private function workingDaysSpan($record)
+    {
+        if($record->working_days == "Monday-Friday")
+        {
+           return 5;
+        }
+        if($record->working_days == "Monday-Saturday")
+        {
+            return  6;
+        }
+        if($record->working_days == "Monday-Sunday")
+        {
+           return 7;
+        }
     }
 
     public function setAppointment(Request $request)
@@ -144,21 +186,31 @@ class ClientController extends Controller
                    return response()->json(['status' => 501 ,'message' => 'Top up your account.Insufficient funds error']);
                }else{
 
-                $nwBalance = $client_bank->balance -$record->consultation_fee;
+                $nwBalance = $client_bank->balance - $record->consultation_fee;
                 $client_bank->update(['balance' => $nwBalance]);
 
                 $newHistory = new ClientAccount();
                 $newHistory->credit = $record->consultation_fee;
-                $newHistory->debt =0;
+                $newHistory->debt = 0;
                 $newHistory->account_id = $client_bank->id;
                 $newHistory->save();
 
-                $new = new PractitionerSlot();
-                $new->day = $request->day;
-                $new->time = $request->time;
-                $new->practitioner_id = $request->id;
-                $new->patient_id = $client->user_id;
-                $new->save();
+                // $today = Carbon::now()->format('l');
+                // $todayIndex = self::days[$today];
+                // $chosenDayIndex  = self::days[$request->day];
+                // if($todayIndex == $chosenDayIndex)
+                // {
+
+                    $new = new PractitionerSlot();
+                    $new->day = $request->day;
+                  //  $new->date = Carbon::now();
+                    $new->time = $request->time;
+                    $new->practitioner_id = $request->id;
+                    $new->patient_id = $client->user_id;
+                    $new->save();
+                // }else{
+                // }
+
                 return response()->json(['status'=> 200, 'message'=> "created"]);
                }
             }
@@ -186,10 +238,11 @@ class ClientController extends Controller
 
     private function getBusinessDays($clinic_data)
     {
+        //$today = Carbon::now()->format('l');
+
         if(trim($clinic_data['working_days'][1]) == 'Friday')
         {
-            $workingDays =['Monday','Tuesday','Wednesday','Thursday','Friday'];
-
+            $workingDays = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
         }
 
         if(trim($clinic_data['working_days'][1]) == 'Saturday')

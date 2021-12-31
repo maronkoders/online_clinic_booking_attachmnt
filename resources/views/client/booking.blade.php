@@ -134,10 +134,10 @@
              </div>
 
 
-
              <div class="submit-section proceed-btn text-left">
                 <a href="javascript:void(0);"  onclick="setAppointment(event,'{{$data->id}}')" class="btn btn-primary submit-btn">Set Appointment</a>
              </div>
+
           </div>
        </div>
     </div>
@@ -157,7 +157,6 @@
         let clientId = document.getElementById('client_id').value;
         if( localStorage.getItem('appointment_time') !=  null)
         {
-
             document.getElementById('time_error').style.visibility = "hidden";
         }
 
@@ -175,23 +174,27 @@
                 }
 
                 $.ajax({
-                type: "POST",
-                url:"{{url('set-appointment')}}",
-                dataType:"application/json",
-                data:formData,
-                success: function(response){
-
-                    console.log("message", response)
-
-                    if(response.status ==200)
+                    type: "POST",
+                    url:"{{url('set-appointment')}}",
+                    dataType:"json",
+                    data:formData,
+                    success: function(data, status, xhr)
                     {
-                        window.origin.href ="/appointment_booked";
-                    }
-                    if(response.status ==404){
+                        if(data.status === 200)
+                        {
+                             location.href  = "/appointment_booked";
+                        }
+                        if(data.status === 404 || data.status === 501 ){
+                            document.getElementById('error_message').style.visibility = "visible";
+                            document.getElementById('error_message').innerText = data.message;
+                        }
+
+                    },
+                    error: function (jqXhr, textStatus, errorMessage)
+                    {
                         document.getElementById('error_message').style.visibility = "visible";
-                        document.getElementById('error_message').innerText = response.message;
+                        document.getElementById('error_message').innerText = errorMessage;
                     }
-                }
             });
           }
      }
