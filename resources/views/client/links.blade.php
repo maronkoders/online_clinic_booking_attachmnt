@@ -18,7 +18,7 @@
             </a>
        </li>
 
-       <li  @if (Request::path() == "medical-records")
+       {{-- <li  @if (Request::path() == "medical-records")
                 class="active"
             @endif >
 
@@ -26,7 +26,7 @@
         <span>Add Medical Records</span>
         <i class="feather-paperclip"></i>
         </a>
-    </li>
+    </li> --}}
 
     <li  @if (Request::path() == "prescriptions")
     class="active"
@@ -38,7 +38,7 @@
 </a>
 </li>
 
-     <li   @if (Request::path() == "medical-details")
+     {{-- <li   @if (Request::path() == "medical-details")
      class="active"
  @endif >
 
@@ -46,7 +46,7 @@
         <span>Medical Details</span>
         <i class="fas fa-user-injured"></i>
         </a>
-    </li>
+    </li> --}}
 
     {{-- <li class="active">
     <a href="{{url('/profile')}}">

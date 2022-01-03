@@ -15,7 +15,7 @@
        <i class="feather-calendar"></i>
        </a>
     </li>
-    <li @if (Request::path() =="doctor-patients")
+    <li @if (Request::path() =="doctor-patients" || Request::path() == 'patient_info')
     class="active"
 @endif >
       <a href="{{url('/doctor-patients')}}">

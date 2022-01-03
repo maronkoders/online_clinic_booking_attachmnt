@@ -20,4 +20,14 @@ class Practitioner extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function slot()
+    {
+        return $this->hasMany(PractitionerSlot::class);
+    }
+
+    public function prescription()
+    {
+        return $this->hasMany(prescription::class);
+    }
 }

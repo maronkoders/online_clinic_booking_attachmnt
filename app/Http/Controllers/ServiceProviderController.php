@@ -55,6 +55,8 @@ class ServiceProviderController extends Controller
         return view('doctor_dashboard.patients')->with(['patients'=> $patients]);
     }
 
+    
+
     public function getAppointments()
     {
         $practitioner = Practitioner::where('user_id', Auth::user()->id)->first();

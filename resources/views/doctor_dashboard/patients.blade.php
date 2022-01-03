@@ -52,7 +52,7 @@
                                {{-- <li>Gender <span>{{$item->users->gender}}</span></li> --}}
                                <li>
 
-                                <a href="{{url('patient_info/'.$item->patient_id)}}">
+                                <a href="{{url('patient_info?id='.$item->patient_id)}}">
                                     VIEW MORE
                                 </a>
 

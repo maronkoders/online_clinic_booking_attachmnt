@@ -13,4 +13,9 @@ class PractitionerSlot extends Model
     {
         return $this->belongsTo(User::class,'patient_id','id');
     }
+
+    public function practitioner()
+    {
+        return $this->belongsTo(Practitioner::class,'practitioner_id','id');
+    }
 }

@@ -21,7 +21,6 @@ class CreateClinicsTable extends Migration
         });
     }
 
-
     public function down()
     {
         Schema::dropIfExists('clinics');

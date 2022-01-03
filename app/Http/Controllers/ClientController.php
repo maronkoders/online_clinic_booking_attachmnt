@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\ClientAccount;
 use App\Models\ClientBank;
 use App\Models\ClientHistory;
+use App\Models\ClientMedicalDetail;
 use App\Models\Clinic;
 use App\Models\ClinicPatient;
 use App\Models\Practitioner;
 use App\Models\PractitionerSlot;
 use App\Models\prescription;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,15 +33,57 @@ class ClientController extends Controller
         return view('client.search')->with(['practitioners' => $allPractitioners]);
     }
 
-    public function patientInfo($id)
-    {
 
+    public function savePrescriptions(Request $request){
+        $validator = Validator::make($request->all(),[
+            'description' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+         }else{
+             $request['practitioner_id'] = auth()->user()->id;
+             prescription::create($request->except(['_token']));
+             return redirect()->back()->with('status','Prescription  record was added');
+         }
+    }
+
+    public function saveMedicalData(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'heartRate' => 'required|numeric',
+            'bodyTemperature' => 'required|numeric',
+            'glucoseLevel' => 'required|numeric',
+            'bloodPressure' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+         }else{
+             ClientMedicalDetail::create($request->except(['_token']));
+             return redirect()->back()->with('status','Medical record was updated');
+         }
+    }
+
+    public function patientInfo(Request $request)
+    {
+        $user  =User::find($request->id);
+        $details = ClientMedicalDetail::where('user_id',$request->id)->first();
+        return view('client.patient_info')
+                ->with([
+                        'details'=> $details,
+                        'patient_id' => $request->id,
+                        'user'=> $user
+                    ]);
     }
 
     public function prescriptions()
     {
-        $allPractitioners = prescription::where('user_id', Auth::user()->id)->get();
-        return view('client.prescriptions')->with(['prescriptions' => $allPractitioners]);
+        $pres = prescription::with('practitioner')
+                                ->where('user_id', Auth::user()->id)
+                                ->get();
+
+        return view('client.prescriptions')->with(['prescriptions' => $pres]);
     }
 
     public function saveBankDetails(Request $request)
@@ -181,7 +225,7 @@ class ClientController extends Controller
                $record = Clinic::latest()->first();
                $client_bank = ClientBank::where('user_id', $client->user_id)->first();
 
-               if($client_bank->balance < $record->consultation_fee)
+               if(is_null($client_bank) || $client_bank->balance < $record->consultation_fee )
                {
                    return response()->json(['status' => 501 ,'message' => 'Top up your account.Insufficient funds error']);
                }else{
@@ -266,8 +310,15 @@ class ClientController extends Controller
 
     public function getDashboard()
     {
-        $appointments = array();
-        return view('client.dashboard');
+
+      //  dd(auth()->user()->id);
+
+        $appointments = PractitionerSlot::with('practitioner')
+                        ->where('patient_id', auth()->user()->id)
+                       // ->where('created_at','<=',now())
+                        ->get();
+        $medDetails  = ClientMedicalDetail::where('user_id',auth()->user()->id)->first();
+        return view('client.dashboard')->with(['med_details' => $medDetails, 'appointments' => $appointments]);
     }
 
     public function getMedicalRecords()

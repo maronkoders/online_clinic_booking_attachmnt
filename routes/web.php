@@ -21,9 +21,11 @@ Route::get('/profile',[ClientController::class, 'getProfile']);
 Route::post('/set-appointment',[ClientController::class,'setAppointment']);
 Route::get('/add_bank',[ClientController::class,'getAddBank']);
 Route::post('/save_bank_details',[ClientController::class,'saveBankDetails']);
+Route::post('/save_medical_data',[ClientController::class,'saveMedicalData']);
+Route::post('/save_prescriptions',[ClientController::class,'savePrescriptions']);
 Route::post('/top_up',[ClientController::class,'topUp']);
 Route::get('/prescriptions',[ClientController::class,'prescriptions']);
-Route::get('/patient_info/{id}',[ClientController::class,'patientInfo']);
+Route::get('/patient_info',[ClientController::class,'patientInfo']);
 
 //Doctors
 Route::get('/doctor-dashboard',[ServiceProviderController::class, 'doctorDashboard']);
