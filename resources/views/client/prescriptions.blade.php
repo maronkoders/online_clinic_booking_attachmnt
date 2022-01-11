@@ -50,40 +50,43 @@
     <table class="table table-hover table-center mb-0">
     <thead>
                 <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>Description</th>
+
+
+
                 <th>Practitioner Name</th>
-                <th>Action</th>
+                <th>Description</th>
+                <th>Date</th>
+
                 </tr>
     </thead>
     <tbody>
 
 
         @foreach ($prescriptions as  $item)
-
         <tr>
-            <td>6</td>
-            <td>27 Oct 2021 <span class="d-block text-info">8.00 AM</span></td>
-            <td>Prescription</td>
+
+
+
+
+
             <td>
-            <h2 class="table-avatar">
-            <a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-            <img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-06.jpg" alt="User Image">
-            </a>
-            <a href="doctor-profile.html">Dr. Katharine Berthold <span>Orthopaedics</span></a>
+
+            Dr.
+                {{ucfirst($item->name)}}
+
+                {{ucfirst($item->surname)}}
+
+
             </h2>
             </td>
             <td>
-            <div class="table-action">
-            <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-            <i class="far fa-eye"></i> View
-            </a>
-            <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-            <i class="fas fa-print"></i> Print
-            </a>
-            </div>
+                {{$item->description}}
             </td>
+
+            <td>
+                {{$item->created_at}}
+            </td>
+
         </tr>
 
         @endforeach

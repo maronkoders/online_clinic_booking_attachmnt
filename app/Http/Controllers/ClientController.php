@@ -19,11 +19,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
-    // protected $clientRecord;
-    // public function __construct()
-    // {
-    //     $this->clientRecord = ClinicPatient::where('user_id', session('user_id'))->first();
-    // }
+    //protected $clientRecord;
+    public function __construct()
+    {
+        // if(auth()->user()->user_type_id == 2)
+        // {
+        //     $this->clientRecord =  ClinicPatient::where('user_id', auth()->user()->id)->first();
+        // }
+    }
 
         const days =  ['Monday' ,'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
@@ -79,9 +82,14 @@ class ClientController extends Controller
 
     public function prescriptions()
     {
-        $pres = prescription::with('practitioner')
-                                ->where('user_id', Auth::user()->id)
-                                ->get();
+        $pres =  \DB::table('prescriptions')
+                            ->LeftJoin('users','prescriptions.user_id','=','users.id')
+                            ->get();
+
+
+        // prescription::with('practitioner')
+        //                         ->where('user_id', Auth::user()->id)
+        //                         ->get();
 
         return view('client.prescriptions')->with(['prescriptions' => $pres]);
     }
@@ -310,15 +318,13 @@ class ClientController extends Controller
 
     public function getDashboard()
     {
-
-      //  dd(auth()->user()->id);
-
         $appointments = PractitionerSlot::with('practitioner')
                         ->where('patient_id', auth()->user()->id)
                        // ->where('created_at','<=',now())
                         ->get();
         $medDetails  = ClientMedicalDetail::where('user_id',auth()->user()->id)->first();
-        return view('client.dashboard')->with(['med_details' => $medDetails, 'appointments' => $appointments]);
+        $cl =   ClinicPatient::where('user_id', auth()->user()->id)->first();
+        return view('client.dashboard')->with(['med_details' => $medDetails, 'appointments' => $appointments ,'client' =>$cl]);
     }
 
     public function getMedicalRecords()

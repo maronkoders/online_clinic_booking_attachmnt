@@ -9,8 +9,10 @@
     <div class="row align-items-center">
     <div class="col-md-12 col-12">
     <h2 class="breadcrumb-title">Dashboard</h2>
-    <nav aria-label="breadcrumb" class="page-breadcrumb">
-    </nav>
+    <div>
+        ClIENT ID : {{$client->client_number}}
+    </div>
+
     </div>
     </div>
     </div>

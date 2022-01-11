@@ -192,7 +192,6 @@
                           <label>Description</label>
                           <input type="hidden"  name="user_id" value="{{$patient_id}}"/>
                           <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
-
                        </div>
                     </div>
                  </div>
@@ -204,7 +203,6 @@
             </form>
         </div>
         </div>
-
     </div>
     </div>
     </div>

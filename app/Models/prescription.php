@@ -12,6 +12,6 @@ class prescription extends Model
     protected $fillable =['description' ,'practitioner_id','user_id'];
     public function practitioner()
     {
-        return $this->belongsTo(Practitioner::class,'practitioner_id','id');
+        return $this->belongsTo(Practitioner::class);
     }
 }
