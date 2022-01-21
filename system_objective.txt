@@ -1,0 +1,4 @@
+-Can patients view their health information
+-can they view their bills and make payments
+-can they check for prescriptions
+-can the medical history be updated
