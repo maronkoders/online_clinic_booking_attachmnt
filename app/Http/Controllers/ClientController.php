@@ -15,25 +15,49 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
     //protected $clientRecord;
-    public function __construct()
-    {
-        // if(auth()->user()->user_type_id == 2)
-        // {
-        //     $this->clientRecord =  ClinicPatient::where('user_id', auth()->user()->id)->first();
-        // }
-    }
+    const days =  ['Monday' ,'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
-        const days =  ['Monday' ,'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    public function forgetPassword()
+    {
+        return view('forget');
+    }
 
     public function searchView()
     {
         $allPractitioners = Practitioner::all();
         return view('client.search')->with(['practitioners' => $allPractitioners]);
+    }
+
+
+    public function resetPassword(Request $request)
+    {
+       try {
+        $validator = Validator::make($request->all(),[
+            'password' => 'required|confirmed|min:6',
+            'email' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }else{
+            $record  = User::where('email',$request->email)->first();
+            if($record!= null)
+            {
+                $record->update(['password' => Hash::make($request->password)]);
+            return redirect()->back()->with('status','Password was successfully resetted');
+            }else{
+             return redirect()->back()->withErrors('User record not found');
+            }
+        }
+       } catch (\Throwable $th) {
+           //throw $th;
+       }
     }
 
 
@@ -83,9 +107,8 @@ class ClientController extends Controller
     public function prescriptions()
     {
         $pres =  \DB::table('prescriptions')
-                            ->LeftJoin('users','prescriptions.user_id','=','users.id')
+                            ->LeftJoin('users','prescriptions.practitioner_id','=','users.id')
                             ->get();
-
 
         // prescription::with('practitioner')
         //                         ->where('user_id', Auth::user()->id)
@@ -134,6 +157,14 @@ class ClientController extends Controller
            $accountHis->credit =0;
            $accountHis->save();
 
+
+           $h = new ClientHistory();
+           $h->patient_id =  Auth::user()->id;// $->user_id;
+           $h->doc_id = null;
+           $h->description ="Direct Deposit";
+           $h->amount = $request->amount;
+           $h->save();
+
             return redirect()->back()->with('status','Topup  successful');
          }
     }
@@ -159,13 +190,11 @@ class ClientController extends Controller
 
         if(!is_null($practitioner_data))
         {
-            $slot = PractitionerSlot::where('practitioner_id',$id)->get()->groupBy('day');
+            $slot = PractitionerSlot::where('practitioner_id',$practitioner_data->user_id)->get()->groupBy('day');
             $clinic = Clinic::first();
             $clinic_data['working_days']  = explode('-',$clinic->working_days);
             $clinic_data['working_hours'] = explode('-',$clinic->working_hours);
             $workingDays  = $this->getBusinessDays($clinic_data);
-
-
             $workingHours = $this->workingHours($clinic_data);
             $allHours  = $workingHours;
             $availableHours = [];
@@ -260,6 +289,14 @@ class ClientController extends Controller
                     $new->practitioner_id = $request->id;
                     $new->patient_id = $client->user_id;
                     $new->save();
+
+                    $userPract = Practitioner::find($request->id);
+                    $h = new ClientHistory();
+                    $h->patient_id =  $client->user_id;
+                    $h->doc_id = $userPract->user_id;
+                    $h->description ="Consultation Fee";
+                    $h->amount = $record->consultation_fee;
+                    $h->save();
                 // }else{
                 // }
 
@@ -346,9 +383,9 @@ class ClientController extends Controller
         }else{
 
             $account = ClientAccount::where('account_id', $bank->id)->get();
-            $accHist = ClientHistory::where('patient_id', Auth::user()->id)->get();
-
+            $accHist = \DB::table('client_histories')->LeftJoin('users','client_histories.doc_id','=','users.id')->where('patient_id', Auth::user()->id)->get();
         }
+
         return view('client.accounts')->with(['bank_data'=> $bank , 'account' => $account ,'accHist' => $accHist]);
     }
 

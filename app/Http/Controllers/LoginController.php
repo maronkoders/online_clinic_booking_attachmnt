@@ -28,9 +28,9 @@ class LoginController extends Controller
         {
             session(['user_id' => Auth::user()->id]);
             return $this->redirectIntenedUser(Auth::user()->user_type_id);
+        }else{
+            return redirect("login")->withErrors('Login details are not valid');
         }
-
-        return redirect("login")->withSuccess('Login details are not valid');
     }
 
     private function getUserType($id)

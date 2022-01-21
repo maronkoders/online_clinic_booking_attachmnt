@@ -180,38 +180,29 @@
     <table class="table table-hover table-center mb-0">
     <thead>
     <tr>
-    <th>Date</th>
+
     <th>Specialist Name</th>
     <th>Amount</th>
-    <th>Actions</th>
+    <th>Description</th>
+    <th>Date</th>
     </tr>
     </thead>
     <tbody>
 
         @foreach($accHist as $his)
             <tr>
-                <td>27 Oct 2021 <span class="d-block text-info apt-time">8.00 AM</span></td>
                 <td>
-                <h2 class="table-avatar">
-                <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
-                <a href="patient-profile.html">Gina Moore <span>#PT0005</span></a>
-                </h2>
+                <a href="javascript:void(0);">{{$his->name ?? '--'}} {{$his->surname ?? '--'}} <span></span></a>
                 </td>
-                <td>$250</td>
-                <td><span class="badge badge-pill danger-status">Refunded</span></td>
-                <td>
-                <div class="table-action">
-                <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                <i class="feather-eye"></i>
-                </a>
-                <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                <i class="feather-check-circle"></i>
-                </a>
-                <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                <i class="feather-x-circle"></i>
-                </a>
-                </div>
-                </td>
+
+                @if ($his->name !=null)
+                <td>({{$his->amount}})</td>
+                @else
+                <td>{{$his->amount}}</td>
+                @endif
+
+                <td>{{$his->description}}</td>
+                <td>{{$his->created_at}}<span class="d-block text-info apt-time"></span></td>
             </tr>
     @endforeach
     </tbody>
@@ -222,171 +213,6 @@
     </div>
 
 
-    <div class="tab-pane fade" id="pat_refundrequest">
-    <div class="card-table mb-0">
-    <div class="card-body">
-    <div class="table-responsive">
-    <table class="table table-hover table-center mb-0">
-    <thead>
-    <tr>
-    <th>Date</th>
-    <th>Patient Name</th>
-     <th>Amount</th>
-    <th>Status</th>
-    <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>11 Nov 2021 <span class="d-block text-info apt-time">10.00 AM</span></td>
-    <td>
-    <h2 class="table-avatar">
-    <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
-    <a href="patient-profile.html">Richard Wilson <span>#PT0016</span></a>
-    </h2>
-    </td>
-    <td>$150</td>
-    <td><span class="badge badge-pill success-status">Paid</span></td>
-    <td>
-    <div class="table-action">
-    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-    <i class="feather-eye"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-    <i class="feather-check-circle"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-    <i class="feather-x-circle"></i>
-    </a>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>3 Nov 2021 <span class="d-block text-info apt-time">11.00 AM</span></td>
-    <td>
-    <h2 class="table-avatar">
-    <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-    <a href="patient-profile.html">Charlene Reed <span>#PT0001</span></a>
-    </h2>
-    </td>
-    <td>$200</td>
-    <td><span class="badge badge-pill success-status">Paid</span></td>
-    <td>
-    <div class="table-action">
-    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-    <i class="feather-eye"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-    <i class="feather-check-circle"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-    <i class="feather-x-circle"></i>
-    </a>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>1 Nov 2021 <span class="d-block text-info apt-time">1.00 PM</span></td>
-    <td>
-    <h2 class="table-avatar">
-    <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
-    <a href="patient-profile.html">Travis Trimble <span>#PT0002</span></a>
-    </h2>
-    </td>
-    <td>$75</td>
-    <td><span class="badge badge-pill success-status">Paid</span></td>
-    <td>
-    <div class="table-action">
-    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-    <i class="feather-eye"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-     <i class="feather-check-circle"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-    <i class="feather-x-circle"></i>
-    </a>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>30 Oct 2021 <span class="d-block text-info apt-time">9.00 AM</span></td>
-    <td>
-    <h2 class="table-avatar">
-    <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
-    <a href="patient-profile.html">Carl Kelly <span>#PT0003</span></a>
-    </h2>
-    </td>
-    <td>$100</td>
-    <td><span class="badge badge-pill warning-status">Pending</span></td>
-    <td>
-    <div class="table-action">
-    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-    <i class="feather-eye"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-    <i class="feather-check-circle"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-    <i class="feather-x-circle"></i>
-    </a>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>28 Oct 2021 <span class="d-block text-info apt-time">6.00 PM</span></td>
-    <td>
-    <h2 class="table-avatar">
-     <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
-    <a href="patient-profile.html">Michelle Fairfax <span>#PT0004</span></a>
-    </h2>
-    </td>
-    <td>$350</td>
-    <td><span class="badge badge-pill success-status">Paid</span></td>
-    <td>
-    <div class="table-action">
-    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-    <i class="feather-eye"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-    <i class="feather-check-circle"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-    <i class="feather-x-circle"></i>
-    </a>
-    </div>
-    </td>
-    </tr>
-    <tr>
-    <td>27 Oct 2021 <span class="d-block text-info apt-time">8.00 AM</span></td>
-    <td>
-    <h2 class="table-avatar">
-    <a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
-    <a href="patient-profile.html">Gina Moore <span>#PT0005</span></a>
-    </h2>
-    </td>
-    <td>$250</td>
-    <td><span class="badge badge-pill danger-status">Refunded</span></td>
-    <td>
-    <div class="table-action">
-    <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-    <i class="feather-eye"></i>
-     </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-    <i class="feather-check-circle"></i>
-    </a>
-    <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-    <i class="feather-x-circle"></i>
-    </a>
-    </div>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    </div>
 
     </div>
 

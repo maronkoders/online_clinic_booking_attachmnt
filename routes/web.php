@@ -26,6 +26,10 @@ Route::post('/save_prescriptions',[ClientController::class,'savePrescriptions'])
 Route::post('/top_up',[ClientController::class,'topUp']);
 Route::get('/prescriptions',[ClientController::class,'prescriptions']);
 Route::get('/patient_info',[ClientController::class,'patientInfo']);
+Route::get('/forget_password',[ClientController::class,'forgetPassword']);
+Route::post('/reset_password',[ClientController::class,'resetPassword']);
+
+
 
 //Doctors
 Route::get('/doctor-dashboard',[ServiceProviderController::class, 'doctorDashboard']);
