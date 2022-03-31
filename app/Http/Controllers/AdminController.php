@@ -18,24 +18,44 @@ class AdminController extends Controller
 {
     public function addClinic(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required| alpha_dash',
-            'address' => 'required | alpha_dash',
-            'city'=> 'required|alpha',
-            'email'=>'required|unique:clinics',
-            'phone'=>'required|unique:clinics|digits:10',
-            'working_hours' =>'required',
-            'working_days' =>'required',
-            'consultation_fee' =>'required|integer'
-        ]);
+        $clinic = Clinic::where('email', $request->email)->first();
 
-
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator->errors())->withInput();
+        if(is_null($clinic))
+        {
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'address' => 'required|regex:/[a-zA-Z0-9\s]+/',
+                'city'=> 'required|alpha',
+                'email'=>'required',
+                'phone'=>'required|digits:10',
+                'working_hours' =>'required',
+                'working_days' =>'required',
+                'consultation_fee' =>'required|numeric|between:0,99.99'
+            ]);
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator->errors())->withInput();
+            }else{
+                 Clinic::create($request->all());
+                return redirect()->to('/clinic-details')->with('status','Clinic Data saved');
+            }
         }else{
-             Clinic::create($request->all());
-            return redirect()->to('/clinic-details')->with('status','Clinic Data saved');
+            $validator = Validator::make($request->all(),[
+                'name' =>'required|regex:/^[\pL\s\-]+$/u',
+                'address' =>'required|regex:/[a-zA-Z0-9\s]+/',
+                'city'=> 'required|alpha',
+                'phone'=>'required|digits:10',
+                'working_hours' =>'required',
+                'working_days' =>'required',
+                'consultation_fee' =>'required|numeric|between:0,99.99'
+            ]);
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator->errors())->withInput();
+            }else{
+                $clinic->update($request->all());
+                return redirect()->to('/clinic-details')->with('status','Clinic Data saved');
+            }
         }
+
     }
 
     public function saveEducation(Request $request)
@@ -45,7 +65,6 @@ class AdminController extends Controller
             'college' =>'required',
             'completion_year'=>'required'
         ]);
-
 
         PractitionerEducation::create($request->all());
 
